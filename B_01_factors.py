@@ -41,29 +41,39 @@ def num_check(question):
         except ValueError:
             print(error)
 
-# Works out factors, returns sorted list
-def factor(var_to_factor):
-    var_to_factor = []
 
-    while True:
-        for item in range(1, 200):
-            all_factor =
+# Gets factors, returns a sorted list
+def get_factors(factors):
+    # x**(0.5) is the square root of x
 
-            remainder = to_factor % all_factor
+    # We want to loop until we get to the square root of to_factor
+    # stop is the square root of the factor.
+    # Basically instead of going from one to the number,
+    # we go from 1 to 'stop' (which is the square root
+    # of the number we are trying to factorise)
 
-            for item in range(0, 5):
+    stop = int(factors ** 0.5)
 
-                # generate a random number
-                factors = num_check(1, 10)
+    factors_list = []
 
-                if factors not in var_to_factor:
-                    var_to_factor.append(factors)
+    for item in range(1, stop + 1):
 
-            if remainder == 0:
-                print(f"{all_factor} is a factor of {to_factor} !")
+        # if modulo is zero, then the number is a factor
+        if factors % item == 0:
 
-            var_to_factor.sort()
-            return
+            # find second factor by dividing 'to factor' by the first factor
+            factor_2 = int(factors / item)
+
+            # Add first factor to list
+            factors_list.append(item)
+
+            # check second factor is not in list and add it
+            if factor_2 not in factors_list:
+                factors_list.append(factor_2)
+
+    # output
+    factors_list.sort()
+    return factors_list
 
 # Main routine goes here
 
@@ -88,7 +98,7 @@ while True:
 
     # get factors for integers that are 2 or more
     elif to_factor != 1:
-        all_factors = factor(to_factor)
+        all_factors = get_factors(to_factor)
 
     # Set up a comment for unity
     else: all_factors = ""
@@ -111,7 +121,6 @@ while True:
         heading = "One is special"
 
     # output factors and comment
-    print(factor)
     statement_generator(heading, "*")
     print(all_factors)
     print(comment)
